@@ -1,9 +1,20 @@
 class Article < ApplicationRecord
-  has_many :article_translations
+  has_many :translations, foreign_key: 'article_id', class_name: "ArticleTranslation"
   has_many :comments,->{ where(:reference_type=>'article')}, :foreign_key => :reference_id
+  has_and_belongs_to_many :tags
 
-  def translation (lang)
-    article_translations.where(lang: lang)
+  enum status: [ :pending, :published ]
+
+  def title
+    translation.title
+  end
+
+  def content
+    translation.content
+  end
+
+  def translation
+    translations.find_by_lang(I18n.locale)
   end
 
   def create_translation (lang)
