@@ -15,7 +15,7 @@ class ArticleController < ApplicationController
 
   def comments
     @comments = @article.comments.published.order(created_at: :desc).take(2)
-    render json:@comments, status: :ok
+    render json:@comments
   end
 
   def create_comment
