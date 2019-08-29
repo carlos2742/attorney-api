@@ -1,7 +1,7 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  private
+  protected
 
       def create_comment_template (params)
         comment = Comment.new
@@ -11,5 +11,6 @@ class ApplicationRecord < ActiveRecord::Base
         comment.status = Comment.statuses[:pending]
         yield(comment)
         comments << comment
+        comment
       end
 end

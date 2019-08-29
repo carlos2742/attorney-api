@@ -1,17 +1,31 @@
 class Article < ApplicationRecord
-  has_many :article_translations
+  has_many :translations, foreign_key: 'article_id', class_name: "ArticleTranslation", dependent: :delete_all
   has_many :comments,->{ where(:reference_type=>'article')}, :foreign_key => :reference_id
+  has_and_belongs_to_many :tags, dependent: :delete_all
+  belongs_to :practice_area
 
-  def translation (lang)
-    article_translations.where(lang: lang)
+  enum status: [ :pending, :published ]
+
+  def title
+    translation.title
   end
 
-  def create_translation (lang)
-    article_trans = ArticleTranslation.new
-    article_trans.title = lang === 'en' ? 'Hello World' : 'Hola Mundo'
-    article_trans.content = lang === 'en' ? 'Testing Article multilanguage' : 'Probando Articulo con multilenguaje'
-    article_trans.lang = lang
-    article_translations << article_trans
+  def content
+    translation.content
+  end
+
+  def translation
+    translations.find_by_lang(I18n.locale)
+  end
+
+  def create_translation (fields)
+    fields.each do |item|
+      article_trans = ArticleTranslation.new
+      article_trans.title = item[:title]
+      article_trans.content = item[:content]
+      article_trans.lang = item[:lang]
+      translations << article_trans
+    end
   end
 
   def create_comment (params)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190819194011) do
+ActiveRecord::Schema.define(version: 20190829004637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,20 @@ ActiveRecord::Schema.define(version: 20190819194011) do
   end
 
   create_table "articles", force: :cascade do |t|
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "status",           default: 0
+    t.integer  "practice_area_id"
+    t.index ["practice_area_id"], name: "index_articles_on_practice_area_id", using: :btree
+  end
+
+  create_table "articles_tags", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_articles_tags_on_article_id", using: :btree
+    t.index ["tag_id"], name: "index_articles_tags_on_tag_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -41,9 +53,31 @@ ActiveRecord::Schema.define(version: 20190819194011) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "subscribers", force: :cascade do |t|
+  create_table "practice_area_translations", force: :cascade do |t|
+    t.integer  "practice_area_id"
     t.string   "name"
-    t.string   "email"
+    t.integer  "lang"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["practice_area_id"], name: "index_practice_area_translations_on_practice_area_id", using: :btree
+  end
+
+  create_table "practice_areas", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "key"
+  end
+
+  create_table "tag_translations", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.string   "name"
+    t.integer  "lang"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_tag_translations_on_tag_id", using: :btree
+  end
+
+  create_table "tags", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,9 +85,14 @@ ActiveRecord::Schema.define(version: 20190819194011) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "rol",        default: 0
   end
 
   add_foreign_key "article_translations", "articles"
+  add_foreign_key "articles_tags", "articles"
+  add_foreign_key "articles_tags", "tags"
+  add_foreign_key "practice_area_translations", "practice_areas"
+  add_foreign_key "tag_translations", "tags"
 end
