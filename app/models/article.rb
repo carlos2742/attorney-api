@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
   has_many :translations, foreign_key: 'article_id', class_name: "ArticleTranslation", dependent: :delete_all
   has_many :comments,->{ where(:reference_type=>'article')}, :foreign_key => :reference_id
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, dependent: :delete_all
 
   enum status: [ :pending, :published ]
 
