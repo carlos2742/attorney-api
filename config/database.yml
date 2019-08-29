@@ -9,14 +9,14 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  username: <%= ENV['ATT_DATABASE_USER'] %>
-  password: <%= ENV['ATT_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
   database: att_development
-  host: <%= ENV['ATT_DATABASE_HOST'] %>
-  port: <%= ENV['ATT_DATABASE_PORT'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,10 +24,10 @@ development:
 test:
   <<: *default
   database: att_test
-  host: <%= ENV['ATT_DATABASE_HOST'] %>
-  port: <%= ENV['ATT_DATABASE_PORT'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
 
 production:
   <<: *default
-  username: <%= ENV['ATT_DATABASE_USER'] %>
-  password: <%= ENV['ATT_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
