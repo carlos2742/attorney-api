@@ -6,8 +6,8 @@ class Tag < ApplicationRecord
     translation.name
   end
 
-  def translation (lang)
-    translations.find_by_lang(lang)
+  def translation
+    translations.find_by_lang(I18n.locale)
   end
 
 end
