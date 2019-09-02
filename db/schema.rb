@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190829004637) do
+ActiveRecord::Schema.define(version: 20190828213139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,10 @@ ActiveRecord::Schema.define(version: 20190829004637) do
   end
 
   create_table "articles", force: :cascade do |t|
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "status",           default: 0
+    t.string   "image_id",         default: ""
     t.integer  "practice_area_id"
     t.index ["practice_area_id"], name: "index_articles_on_practice_area_id", using: :btree
   end
@@ -80,14 +81,6 @@ ActiveRecord::Schema.define(version: 20190829004637) do
   create_table "tags", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "rol",        default: 0
   end
 
   add_foreign_key "article_translations", "articles"
