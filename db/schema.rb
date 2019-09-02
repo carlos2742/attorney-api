@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20190830215611) do
   create_table "articles", force: :cascade do |t|
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.string   "image_id",         default: ""
     t.integer  "status",           default: 0
+    t.string   "image_id",         default: ""
     t.integer  "practice_area_id"
     t.index ["practice_area_id"], name: "index_articles_on_practice_area_id", using: :btree
   end
