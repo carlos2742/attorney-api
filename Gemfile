@@ -50,6 +50,9 @@ gem 'will_paginate', '~> 3.1.0'
 
 #authentication
 gem 'devise_token_auth'
+gem 'devise'
+gem 'omniauth'
+
 
 #authorization
 gem 'cancancan'
