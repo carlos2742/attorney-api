@@ -5,8 +5,8 @@ class ArticleController < ApplicationController
 
   # ---- Blog Services ---- #
   def search
-    @articles = Article.published.order(updated_at: :desc)
-    render json:@articles, status: :ok
+    @group = Article.published.order(updated_at: :desc).group_by { |m| m.updated_at.beginning_of_month }
+    render json:@group.to_a, each_serializer: ArticleGroupSerializer, status: :ok
   end
 
   def view
@@ -28,9 +28,9 @@ class ArticleController < ApplicationController
   end
 
   def create
-    @article = Article.new
+    @article = Article.new(article_params)
     @article.save
-    render status: :created if @article.create_translation article_params[:fields]
+    render status: :created if @article.create_translation translation_params[:fields]
   end
 
   def update
@@ -64,7 +64,11 @@ class ArticleController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def article_params
-    params.require(:article).permit(fields: [:lang, :title, :content])
+    params.require(:article).permit(:practice_area_id, :image_id)
+  end
+
+  def translation_params
+    params.require(:translation).permit(fields: [:lang, :title, :content])
   end
 
   def comment_params
