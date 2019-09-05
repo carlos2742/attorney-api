@@ -14,12 +14,12 @@ class ArticleController < ApplicationController
   end
 
   def comments
-    @comments = @article.comments.published.order(created_at: :desc).take(2)
+    @comments = @article.comments.published.take(3)
     render json:@comments
   end
 
   def create_comment
-    render status: :created if @article.create_comment(comment_params)
+    render json: {created: 'success'}, status: :created if @article.create_comment(comment_params)
   end
 
   # ---- Admin Services ---- #
