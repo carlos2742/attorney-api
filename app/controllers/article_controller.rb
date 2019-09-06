@@ -5,8 +5,9 @@ class ArticleController < ApplicationController
 
   # ---- Blog Services ---- #
   def search
-    @group = Article.published.order(updated_at: :desc).group_by { |m| m.updated_at.beginning_of_month }
-    render json:@group.to_a, each_serializer: ArticleGroupSerializer, status: :ok
+    @articles = Article.published.order(updated_at: :desc).group_by { |m| m.updated_at.beginning_of_month }
+    ags = ArticleGroupSerializer.new(@articles)
+    render json: ags.serializable_hash
   end
 
   def view
