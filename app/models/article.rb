@@ -7,11 +7,15 @@ class Article < ApplicationRecord
   enum status: [ :pending, :published ]
 
   def title
-    title = {
-        es: translations.find_by_lang(:es).title,
-        en: translations.find_by_lang(:en).title
+    translation.title
+  end
+
+  def permalinks
+    permalinks = {
+        es: translations.find_by_lang(:es).permalink,
+        en: translations.find_by_lang(:en).permalink
     }
-    title
+    permalinks
   end
 
   def content

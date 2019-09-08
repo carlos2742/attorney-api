@@ -1,7 +1,8 @@
 class ArticleController < ApplicationController
 
   before_action :set_article, only: [:show, :update, :destroy, :comments, :create_comment, :publish, :pending]
-  before_action :set_article_by_title, only: [:view]
+  before_action :set_article_by_permalink, only: [:view]
+  before_action :set_lang, only: [:search, :view]
 
   # ---- Blog Services ---- #
   def search
@@ -57,10 +58,15 @@ class ArticleController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def set_article_by_title
-    title = params[:title].gsub '_', ' '
-    translation = ArticleTranslation.find_by_title(title)
+  def set_article_by_permalink
+    permalink = params[:permalink]
+    translation = ArticleTranslation.find_by_permalink(permalink)
     @article = translation.article if translation
+  end
+
+  def set_lang
+    lang = params[:lang]
+    I18n.locale = lang
   end
 
   # Only allow a trusted parameter "white list" through.

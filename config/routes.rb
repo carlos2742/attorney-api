@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
 
-  # ---- Common Services ---- #
-  post 'common/language', to: 'common#change_language'
-
   # ---- Blog Services ---- #
-  post 'articles/search', to: 'article#search'
-  get 'articles/:title/view', to: 'article#view'
+  post 'articles/:lang/search', to: 'article#search'
+  get 'articles/:lang/:permalink/view', to: 'article#view'
   get 'articles/:id/comments', to: 'article#comments'
   post 'articles/:id/comments', to: 'article#create_comment'
 
