@@ -3,8 +3,9 @@ class ArticleTranslation < ApplicationRecord
   enum lang: [ :es, :en ]
 
   before_save do
+    self.title = self.title.strip()
     self.permalink = self.title
-    self.permalink = self.permalink.gsub!(/[?¡!@%&"]/,'').downcase.tr(" ", "-")
+    self.permalink = self.permalink.gsub!(/[?¡!@%&"]/,'').strip().downcase.tr(" ", "-")
   end
 
 end
