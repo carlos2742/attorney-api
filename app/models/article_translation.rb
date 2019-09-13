@@ -5,7 +5,7 @@ class ArticleTranslation < ApplicationRecord
   before_save do
     self.title = self.title.strip()
     self.permalink = self.title
-    self.permalink = self.permalink.gsub!(/[.¿?¡!@%&"]/,'').strip().downcase.tr(" ", "-")
+    self.permalink = I18n.transliterate(self.permalink.gsub!(/[.¿?¡!@%&"]/,'').strip().downcase.tr(" ", "-"))
   end
 
 end
