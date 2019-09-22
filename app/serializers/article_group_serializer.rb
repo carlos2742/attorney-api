@@ -17,9 +17,14 @@ class ArticleGroupSerializer < ActiveModel::Serializer
   end
 
   def serializable_hash
-    @object.map do |some_group_key, some_models|
+    groups = @object.map do |some_group_key, some_models|
       [ some_group_key , serialized_some_models(some_models) ]
     end.to_h
+    {total: @total, groups: groups}
+  end
+
+  def add_total (total)
+    @total = total
   end
 
   private
