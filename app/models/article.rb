@@ -4,6 +4,8 @@ class Article < ApplicationRecord
   has_and_belongs_to_many :tags, dependent: :delete_all
   belongs_to :practice_area
 
+  self.per_page = 8
+
   enum status: [ :pending, :published ]
 
   def title

@@ -6,8 +6,11 @@ class ArticleController < ApplicationController
 
   # ---- Blog Services ---- #
   def search
-    @articles = Article.published.order(updated_at: :desc).group_by { |m| m.updated_at.beginning_of_month }
+    @articles = Article.published.order(updated_at: :desc).paginate(page: page)
+    total = @articles.count
+    @articles = @articles.group_by { |m| m.updated_at.beginning_of_month }
     ags = ArticleGroupSerializer.new(@articles)
+    ags.add_total(total)
     render json: ags.serializable_hash
   end
 
@@ -16,8 +19,9 @@ class ArticleController < ApplicationController
   end
 
   def comments
-    @comments = @article.comments.published.take(3)
-    render json:@comments
+    @comments = @article.comments.published.paginate(page: page)
+    cls = CommentListSerializer.new(@comments)
+    render json: cls.serializable_hash
   end
 
   def create_comment
@@ -80,5 +84,13 @@ class ArticleController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:name, :email, :content)
+  end
+
+  def filter_params
+    params.require(:filters).permit(:practice_area_id, :content);
+  end
+
+  def page
+    params[:page] ? params[:page] : 1
   end
 end

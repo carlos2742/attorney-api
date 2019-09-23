@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
   # ---- Blog Services ---- #
-  post 'articles/:lang/search', to: 'article#search'
+  post 'articles/:lang/search/(:page)', to: 'article#search'
   get 'articles/:lang/:permalink/view', to: 'article#view'
-  get 'articles/:id/comments', to: 'article#comments'
+  get 'articles/:id/comments/(:page)', to: 'article#comments'
   post 'articles/:id/comments', to: 'article#create_comment'
 
   get 'comments/:id/replies', to: 'comment#replies'
-  post 'comments/:id', to: 'comment#create'
+  # post 'comments/:id', to: 'comment#create'
 
   # ---- Admin Services ---- #
   # get 'articles/:id', to: 'article#show'
