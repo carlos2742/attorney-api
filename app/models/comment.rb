@@ -5,6 +5,8 @@ class Comment < ApplicationRecord
   enum status: [ :pending, :published, :rejected ]
   enum reference_type: [ :article, :comment ]
 
+  self.per_page = 3
+
   def create_comment (params)
     create_comment_template(params) do |comment|
       comment.reference_type = Comment.reference_types[:comment]
