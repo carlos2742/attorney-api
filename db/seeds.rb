@@ -82,22 +82,34 @@
 # tag.translations.create({name: 'Contract', lang: 'en'})
 # tag.translations.create({name: 'Contrato', lang: 'es'})
 
-tag = Tag.create()
-tag.translations.create({name: 'Immigrant', lang: 'en'})
-tag.translations.create({name: 'Inmigrante', lang: 'es'})
+# tag = Tag.create()
+# tag.translations.create({name: 'Immigrant', lang: 'en'})
+# tag.translations.create({name: 'Inmigrante', lang: 'es'})
+
+# tag = Tag.create()
+# tag.translations.create({name: 'Embassy', lang: 'en'})
+# tag.translations.create({name: 'Embajada', lang: 'es'})
+
+# tag = Tag.create()
+# tag.translations.create({name: 'Interview', lang: 'en'})
+# tag.translations.create({name: 'Entrevista', lang: 'es'})
+
+# tag = Tag.create()
+# tag.translations.create({name: 'Legal help', lang: 'en'})
+# tag.translations.create({name: 'Ayuda Legal', lang: 'es'})
+
+# tag = Tag.create()
+# tag.translations.create({name: 'Family Petition', lang: 'en'})
+# tag.translations.create({name: 'Reclamación', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Embassy', lang: 'en'})
-tag.translations.create({name: 'Embajada', lang: 'es'})
+tag.translations.create({name: 'Trump', lang: 'en'})
+tag.translations.create({name: 'Trump', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Interview', lang: 'en'})
-tag.translations.create({name: 'Entrevista', lang: 'es'})
+tag.translations.create({name: 'Frontera', lang: 'en'})
+tag.translations.create({name: 'Frontera', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Legal help', lang: 'en'})
-tag.translations.create({name: 'Ayuda Legal', lang: 'es'})
-
-tag = Tag.create()
-tag.translations.create({name: 'Family Petition', lang: 'en'})
-tag.translations.create({name: 'Reclamación', lang: 'es'})
+tag.translations.create({name: 'Estados Unidos', lang: 'en'})
+tag.translations.create({name: 'Estados Unidos', lang: 'es'})
