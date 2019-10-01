@@ -102,14 +102,34 @@
 # tag.translations.create({name: 'Family Petition', lang: 'en'})
 # tag.translations.create({name: 'Reclamación', lang: 'es'})
 
-tag = Tag.create()
-tag.translations.create({name: 'Trump', lang: 'en'})
-tag.translations.create({name: 'Trump', lang: 'es'})
+# tag = Tag.create()
+# tag.translations.create({name: 'Trump', lang: 'en'})
+# tag.translations.create({name: 'Trump', lang: 'es'})
+#
+# tag = Tag.create()
+# tag.translations.create({name: 'Frontera', lang: 'en'})
+# tag.translations.create({name: 'Border', lang: 'es'})
+
+# tag = Tag.create()
+# tag.translations.create({name: 'Estados Unidos', lang: 'en'})
+# tag.translations.create({name: 'United States', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Frontera', lang: 'en'})
-tag.translations.create({name: 'Frontera', lang: 'es'})
+tag.translations.create({name: 'Passport', lang: 'en'})
+tag.translations.create({name: 'Pasaporte', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Estados Unidos', lang: 'en'})
-tag.translations.create({name: 'Estados Unidos', lang: 'es'})
+tag.translations.create({name: 'Travel', lang: 'en'})
+tag.translations.create({name: 'Viaje', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Consulate', lang: 'en'})
+tag.translations.create({name: 'Consulado', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Tourism', lang: 'en'})
+tag.translations.create({name: 'Turismo', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Business', lang: 'en'})
+tag.translations.create({name: 'Negocio', lang: 'es'})
