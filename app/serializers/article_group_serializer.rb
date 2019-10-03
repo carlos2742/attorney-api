@@ -1,13 +1,17 @@
 class ArticleGroupSerializer < ActiveModel::Serializer
 
   class ArticleSerializer < ActiveModel::Serializer
-    attributes :id, :title, :image_id, :updated_at, :permalinks
+    attributes :id, :title, :summary, :image_id, :updated_at, :permalinks
 
     belongs_to :practice_area
-    has_many :tags
+    has_many :main_tags
 
     def title
       object.title
+    end
+
+    def summary
+      "#{object.content.split(" ").take(40).join(" ")} ..."
     end
 
     def permalinks
