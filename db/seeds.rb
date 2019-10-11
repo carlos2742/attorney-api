@@ -114,22 +114,42 @@
 # tag.translations.create({name: 'Estados Unidos', lang: 'en'})
 # tag.translations.create({name: 'United States', lang: 'es'})
 
-tag = Tag.create()
-tag.translations.create({name: 'Passport', lang: 'en'})
-tag.translations.create({name: 'Pasaporte', lang: 'es'})
+# tag = Tag.create()
+# tag.translations.create({name: 'Passport', lang: 'en'})
+# tag.translations.create({name: 'Pasaporte', lang: 'es'})
+#
+# tag = Tag.create()
+# tag.translations.create({name: 'Travel', lang: 'en'})
+# tag.translations.create({name: 'Viaje', lang: 'es'})
+#
+# tag = Tag.create()
+# tag.translations.create({name: 'Consulate', lang: 'en'})
+# tag.translations.create({name: 'Consulado', lang: 'es'})
+#
+# tag = Tag.create()
+# tag.translations.create({name: 'Tourism', lang: 'en'})
+# tag.translations.create({name: 'Turismo', lang: 'es'})
+
+# tag = Tag.create()
+# tag.translations.create({name: 'Business', lang: 'en'})
+# tag.translations.create({name: 'Negocio', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Travel', lang: 'en'})
-tag.translations.create({name: 'Viaje', lang: 'es'})
+tag.translations.create({name: 'Wedding', lang: 'en'})
+tag.translations.create({name: 'Boda', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Consulate', lang: 'en'})
-tag.translations.create({name: 'Consulado', lang: 'es'})
+tag.translations.create({name: 'Marriage', lang: 'en'})
+tag.translations.create({name: 'Matrimonio', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Tourism', lang: 'en'})
-tag.translations.create({name: 'Turismo', lang: 'es'})
+tag.translations.create({name: 'Partners', lang: 'en'})
+tag.translations.create({name: 'Novios', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Business', lang: 'en'})
-tag.translations.create({name: 'Negocio', lang: 'es'})
+tag.translations.create({name: 'Property', lang: 'en'})
+tag.translations.create({name: 'Bienes', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Love', lang: 'en'})
+tag.translations.create({name: 'Amor', lang: 'es'})
