@@ -5,7 +5,7 @@ class Article < ApplicationRecord
   has_and_belongs_to_many :main_tags, ->{ order(:created_at => :desc).limit(4)}, class_name: Tag.name
   belongs_to :practice_area
 
-  self.per_page = 6
+  self.per_page = 8
 
   enum status: [ :pending, :published ]
 
