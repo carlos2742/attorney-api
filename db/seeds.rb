@@ -156,7 +156,7 @@ tag.translations.create({name: 'Bienes', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Love', lang: 'en'})
 tag.translations.create({name: 'Amor', lang: 'es'})
-=end
+
 
 tag = Tag.create()
 tag.translations.create({name: 'Cubans', lang: 'en'})
@@ -169,3 +169,20 @@ tag.translations.create({name: 'Cuba', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Cuban adjustment act', lang: 'en'})
 tag.translations.create({name: 'Ley de Ajuste Cubano', lang: 'es'})
+=end
+
+tag = Tag.create()
+tag.translations.create({name: 'Will', lang: 'en'})
+tag.translations.create({name: 'Testamento', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Death', lang: 'en'})
+tag.translations.create({name: 'Muerte', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Heir', lang: 'en'})
+tag.translations.create({name: 'Herederos', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Life', lang: 'en'})
+tag.translations.create({name: 'Vida', lang: 'es'})
