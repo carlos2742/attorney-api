@@ -169,7 +169,7 @@ tag.translations.create({name: 'Cuba', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Cuban adjustment act', lang: 'en'})
 tag.translations.create({name: 'Ley de Ajuste Cubano', lang: 'es'})
-=end
+
 
 tag = Tag.create()
 tag.translations.create({name: 'Will', lang: 'en'})
@@ -186,3 +186,8 @@ tag.translations.create({name: 'Herederos', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Life', lang: 'en'})
 tag.translations.create({name: 'Vida', lang: 'es'})
+=end
+
+tag = Tag.create()
+tag.translations.create({name: 'Public Charge', lang: 'en'})
+tag.translations.create({name: 'Carga Pública', lang: 'es'})
