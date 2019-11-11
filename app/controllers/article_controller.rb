@@ -1,12 +1,17 @@
 class ArticleController < ApplicationController
 
   before_action :set_article, only: [:show, :update, :destroy, :comments, :create_comment, :publish, :pending]
-  before_action :set_article_by_title, only: [:view]
+  before_action :set_article_by_permalink, only: [:view]
+  before_action :set_lang, only: [:search, :view]
 
   # ---- Blog Services ---- #
   def search
-    @articles = Article.published.order(updated_at: :desc)
-    render json:@articles, status: :ok
+    @articles = Article.published.order(updated_at: :desc).paginate(page: page)
+    total = @articles.count
+    @articles = @articles.group_by { |m| m.updated_at.beginning_of_month }
+    ags = ArticleGroupSerializer.new(@articles)
+    ags.add_total(total)
+    render json: ags.serializable_hash
   end
 
   def view
@@ -14,12 +19,13 @@ class ArticleController < ApplicationController
   end
 
   def comments
-    @comments = @article.comments.published.order(created_at: :desc).take(2)
-    render json:@comments
+    @comments = @article.comments.published.paginate(page: page)
+    cls = CommentListSerializer.new(@comments)
+    render json: cls.serializable_hash
   end
 
   def create_comment
-    render status: :created if @article.create_comment(comment_params)
+    render json: {created: 'success'}, status: :created if @article.create_comment(comment_params)
   end
 
   # ---- Admin Services ---- #
@@ -28,9 +34,9 @@ class ArticleController < ApplicationController
   end
 
   def create
-    @article = Article.new
+    @article = Article.new(article_params)
     @article.save
-    render status: :created if @article.create_translation article_params[:fields]
+    render status: :created if @article.create_translation translation_params[:fields]
   end
 
   def update
@@ -56,18 +62,35 @@ class ArticleController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def set_article_by_title
-    title = params[:title].gsub '_', ' '
-    translation = ArticleTranslation.find_by_title(title)
+  def set_article_by_permalink
+    permalink = params[:permalink]
+    translation = ArticleTranslation.find_by_permalink(permalink)
     @article = translation.article if translation
+  end
+
+  def set_lang
+    lang = params[:lang]
+    I18n.locale = lang
   end
 
   # Only allow a trusted parameter "white list" through.
   def article_params
-    params.require(:article).permit(fields: [:lang, :title, :content])
+    params.require(:article).permit(:practice_area_id, :image_id)
+  end
+
+  def translation_params
+    params.require(:translation).permit(fields: [:lang, :title, :content])
   end
 
   def comment_params
     params.require(:comment).permit(:name, :email, :content)
+  end
+
+  def filter_params
+    params.require(:filters).permit(:practice_area_id, :content);
+  end
+
+  def page
+    params[:page] ? params[:page] : 1
   end
 end

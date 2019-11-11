@@ -2,12 +2,23 @@ class Article < ApplicationRecord
   has_many :translations, foreign_key: 'article_id', class_name: "ArticleTranslation", dependent: :delete_all
   has_many :comments,->{ where(:reference_type=>'article')}, :foreign_key => :reference_id
   has_and_belongs_to_many :tags, dependent: :delete_all
+  has_and_belongs_to_many :main_tags, ->{ order(:created_at => :desc).limit(4)}, class_name: Tag.name
   belongs_to :practice_area
+
+  self.per_page = 8
 
   enum status: [ :pending, :published ]
 
   def title
     translation.title
+  end
+
+  def permalinks
+    permalinks = {
+        es: translations.find_by_lang(:es).permalink,
+        en: translations.find_by_lang(:en).permalink
+    }
+    permalinks
   end
 
   def content
