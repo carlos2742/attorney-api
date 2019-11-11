@@ -3,6 +3,7 @@ class ArticleController < ApplicationController
   before_action :set_article, only: [:show, :update, :destroy, :comments, :create_comment, :publish, :pending]
   before_action :set_article_by_permalink, only: [:view]
   before_action :set_lang, only: [:search, :view]
+  load_and_authorize_resource
 
   # ---- Blog Services ---- #
   def search
@@ -29,6 +30,10 @@ class ArticleController < ApplicationController
   end
 
   # ---- Admin Services ---- #
+  def index
+    render json:Article.all, each_serializer: ArticleItemSerializer, status: :ok
+  end
+
   def show
     render json:@article, status: :ok
   end

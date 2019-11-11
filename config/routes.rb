@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   # ---- Admin Services ---- #
   # get 'articles/:id', to: 'article#show'
-  # get 'articles', to: 'article#index'
+  get 'articles', to: 'article#index'
   # post 'articles', to: 'article#create'
   # put 'articles/:id', to: 'article#update'
   # delete 'articles/:id', to: 'article#destroy'
