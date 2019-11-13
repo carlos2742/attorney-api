@@ -186,8 +186,32 @@ tag.translations.create({name: 'Herederos', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Life', lang: 'en'})
 tag.translations.create({name: 'Vida', lang: 'es'})
-=end
 
 tag = Tag.create()
 tag.translations.create({name: 'Public Charge', lang: 'en'})
 tag.translations.create({name: 'Carga Pública', lang: 'es'})
+=end
+
+tag = Tag.create()
+tag.translations.create({name: 'Bankruptcy', lang: 'en'})
+tag.translations.create({name: 'Bancarrota', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Debt', lang: 'en'})
+tag.translations.create({name: 'Deuda', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Loan', lang: 'en'})
+tag.translations.create({name: 'Préstamo', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Property', lang: 'en'})
+tag.translations.create({name: 'Propiedad', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Credit', lang: 'en'})
+tag.translations.create({name: 'Crédito', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Finance', lang: 'en'})
+tag.translations.create({name: 'Finanzas', lang: 'es'})
