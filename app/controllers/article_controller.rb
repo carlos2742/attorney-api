@@ -3,6 +3,7 @@ class ArticleController < ApplicationController
   before_action :set_article, only: [:show, :update, :destroy, :comments, :create_comment, :publish, :pending]
   before_action :set_article_by_permalink, only: [:view]
   before_action :set_lang, only: [:search, :view]
+  load_and_authorize_resource
 
   # ---- Blog Services ---- #
   def search
@@ -29,17 +30,46 @@ class ArticleController < ApplicationController
   end
 
   # ---- Admin Services ---- #
+  def index
+    render json:Article.all.order(id: :desc), each_serializer: ArticleSummarySerializer, status: :ok
+  end
+
   def show
-    render json:@article, status: :ok
+    render json:@article, serializer: ArticleAdminSerializer, status: :ok
   end
 
   def create
-    @article = Article.new(article_params)
-    @article.save
-    render status: :created if @article.create_translation translation_params[:fields]
+    if article_params && tag_params && translation_params
+      @article = Article.new(article_params)
+      @article.save
+      @article.tags << Tag.find(tag_params[:values])
+      render json:{id: @article.id}, status: :created if @article.create_translation translation_params[:fields]
+    else
+      render json:{message: 'wrong params'}, status: :bad_request
+    end
   end
 
   def update
+    if !article_params && !tag_params && !translation_params
+      render json:{message: 'wrong params'}, status: :bad_request
+      return
+    end
+
+    if article_params
+      @article.practice_area_id = article_params[:practice_area_id] if @article.practice_area_id != article_params[:practice_area_id]
+      @article.image_id = article_params[:image_id] if @article.image_id != article_params[:image_id]
+      @article.save
+    end
+
+    if translation_params && !translation_params[:fields].empty?
+      @article.update_translation translation_params[:fields]
+    end
+
+    if tag_params && !tag_params[:values].empty? && tag_params[:values] != @article.tags.pluck(:id)
+      @article.tags.delete_all
+      @article.tags << Tag.find(tag_params[:values])
+    end
+    render json:@article, serializer: ArticleAdminSerializer, status: :ok
   end
 
   def destroy
@@ -48,12 +78,12 @@ class ArticleController < ApplicationController
 
   def publish
     @article.published!
-    render status: :ok
+    render json:{status: @article.status}, status: :ok
   end
 
-  def pending
+  def unpublish
     @article.pending!
-    render status: :ok
+    render json:{status: @article.status}, status: :ok
   end
 
   private
@@ -80,6 +110,10 @@ class ArticleController < ApplicationController
 
   def translation_params
     params.require(:translation).permit(fields: [:lang, :title, :content])
+  end
+
+  def tag_params
+    params.require(:tag).permit(values: [])
   end
 
   def comment_params

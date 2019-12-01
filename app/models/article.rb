@@ -39,6 +39,15 @@ class Article < ApplicationRecord
     end
   end
 
+  def update_translation (fields)
+    fields.each do |item|
+      article_trans = translations.find_by_lang(item[:lang])
+      article_trans.title = item[:title] if article_trans.title != item[:title]
+      article_trans.content = item[:content] if article_trans.content != item[:content]
+      article_trans.save
+    end
+  end
+
   def create_comment (params)
     create_comment_template(params) do |comment|
       comment.reference_type = Comment.reference_types[:article]
