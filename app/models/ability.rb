@@ -31,7 +31,44 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
     if user.present?
-      can :index, Article
+      collaborator
+    else
+      guest
     end
+  end
+
+  def owner
+    collaborator
+    can :index, User
+    can :create, User
+    can :show, User
+    can :update, User
+    can :destroy, User
+  end
+
+  def collaborator
+    guest
+    can :index, Article
+    can :create, Article
+    can :update, Article
+    can :show, Article
+    can :publish, Article
+    can :unpublish, Article
+
+    can :index, PracticeArea
+
+    can :index, Tag
+    can :create, Tag
+    can :update, Tag
+    can :destroy, Tag
+
+    can :profile, User
+  end
+
+  def guest
+    can :search, Article
+    can :view, Article
+    can :comments, Article
+    can :create_comment, Article
   end
 end

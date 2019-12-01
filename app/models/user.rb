@@ -13,6 +13,6 @@ class User < ActiveRecord::Base
 
   include DeviseTokenAuth::Concerns::User
   
-  enum rol: [ :guest, :collaborator, :owner ]
+  enum rol: [ :collaborator, :owner, :developer ]
 
 end
