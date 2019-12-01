@@ -169,7 +169,7 @@ tag.translations.create({name: 'Cuba', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Cuban adjustment act', lang: 'en'})
 tag.translations.create({name: 'Ley de Ajuste Cubano', lang: 'es'})
-=end
+
 
 tag = Tag.create()
 tag.translations.create({name: 'Will', lang: 'en'})
@@ -188,5 +188,46 @@ tag.translations.create({name: 'Life', lang: 'en'})
 tag.translations.create({name: 'Vida', lang: 'es'})
 
 tag = Tag.create()
-tag.translations.create({name: 'Life', lang: 'en'})
-tag.translations.create({name: 'Vida', lang: 'es'})
+tag.translations.create({name: 'Public Charge', lang: 'en'})
+tag.translations.create({name: 'Carga Pública', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Bankruptcy', lang: 'en'})
+tag.translations.create({name: 'Bancarrota', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Debt', lang: 'en'})
+tag.translations.create({name: 'Deuda', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Loan', lang: 'en'})
+tag.translations.create({name: 'Préstamo', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Property', lang: 'en'})
+tag.translations.create({name: 'Propiedad', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Credit', lang: 'en'})
+tag.translations.create({name: 'Crédito', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Finance', lang: 'en'})
+tag.translations.create({name: 'Finanzas', lang: 'es'})
+=end
+
+tag = Tag.create()
+tag.translations.create({name: 'Divorce', lang: 'en'})
+tag.translations.create({name: 'Divorcio', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Family', lang: 'en'})
+tag.translations.create({name: 'Familia', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Minors', lang: 'en'})
+tag.translations.create({name: 'Hijos menores', lang: 'es'})
+
+tag = Tag.create()
+tag.translations.create({name: 'Mudanza', lang: 'en'})
+tag.translations.create({name: 'Move', lang: 'es'})
