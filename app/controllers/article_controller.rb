@@ -32,13 +32,14 @@ class ArticleController < ApplicationController
   # ---- Admin Services ---- #
 
   def upload_file
-    metadata = params[:image]
-    file_id = @drive_service.storage_file(metadata, ENTITY_TYPE::ARTICLE)
-    if file_id
-      render json:{drive_file_id: file_id}, status: :ok
-    else
-      render json:{message: 'error'}, status: :bad_request
-    end
+    #metadata = params[:image]
+    #file_id = @drive_service.storage_file(metadata, ENTITY_TYPE::ARTICLE)
+    #if file_id
+    #  render json:{drive_file_id: file_id}, status: :ok
+    #else
+    #  render json:{message: 'error'}, status: :bad_request
+    #end
+     render json:{message: 'upload_file'}, status: :ok
   end
 
   def index
