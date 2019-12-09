@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # delete 'articles/:id', to: 'article#destroy'
   get 'articles/:id/publish', to: 'article#publish'
   get 'articles/:id/unpublish', to: 'article#unpublish'
+  post 'articles/upload_image', to: 'article#upload_file'
   #
   # get 'comments', to: 'comment#index'
   # get 'comments/:id', to: 'comment#show'
