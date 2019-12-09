@@ -55,7 +55,6 @@ class Ability
     can :publish, Article
     can :unpublish, Article
     can :upload_file, Article
-    can :import_image, Article
 
     can :index, PracticeArea
 

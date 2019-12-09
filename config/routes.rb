@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   get 'articles/:id/publish', to: 'article#publish'
   get 'articles/:id/unpublish', to: 'article#unpublish'
   post 'articles/upload_image', to: 'article#upload_file'
-  post 'articles/import_image', to: 'article#import_image'
   #
   # get 'comments', to: 'comment#index'
   # get 'comments/:id', to: 'comment#show'
