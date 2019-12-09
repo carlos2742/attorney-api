@@ -30,7 +30,9 @@ class ArticleController < ApplicationController
   end
 
   # ---- Admin Services ---- #
-
+  def import_image
+    render json:{message: 'import_image'}, status: :ok
+  end
   def upload_file
     #metadata = params[:image]
     #file_id = @drive_service.storage_file(metadata, ENTITY_TYPE::ARTICLE)
