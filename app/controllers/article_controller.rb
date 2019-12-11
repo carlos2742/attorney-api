@@ -50,8 +50,11 @@ class ArticleController < ApplicationController
   end
 
   def create
-    if article_params && tag_params && translation_params
+    if article_params && tag_params && translation_params && image_params
       @article = Article.new(article_params)
+      metadata = image_params
+      file_id = @drive_service.storage_file(metadata, ENTITY_TYPE::ARTICLE)
+      @article.image_id = file_id
       @article.save
       @article.tags << Tag.find(tag_params[:values])
       render json:{id: @article.id}, status: :created if @article.create_translation translation_params[:fields]
@@ -61,14 +64,13 @@ class ArticleController < ApplicationController
   end
 
   def update
-    if !article_params && !tag_params && !translation_params
+    if !article_params && !tag_params && !translation_params && !image_params
       render json:{message: 'wrong params'}, status: :bad_request
       return
     end
 
     if article_params
       @article.practice_area_id = article_params[:practice_area_id] if @article.practice_area_id != article_params[:practice_area_id]
-      @article.image_id = article_params[:image_id] if @article.image_id != article_params[:image_id]
       @article.save
     end
 
@@ -80,6 +82,15 @@ class ArticleController < ApplicationController
       @article.tags.delete_all
       @article.tags << Tag.find(tag_params[:values])
     end
+
+    if image_params && image_params[:id] != @article.image_id
+      @drive_service.remove_file(@article.image_id) if @article.image_id && @article.image_id != ''
+      metadata = image_params
+      file_id = @drive_service.storage_file(metadata, ENTITY_TYPE::ARTICLE)
+      @article.image_id = file_id
+      @article.save
+    end
+
     render json:@article, serializer: ArticleAdminSerializer, status: :ok
   end
 
@@ -116,7 +127,7 @@ class ArticleController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def article_params
-    params.require(:article).permit(:practice_area_id, :image_id)
+    params.require(:article).permit(:practice_area_id)
   end
 
   def translation_params
@@ -125,6 +136,10 @@ class ArticleController < ApplicationController
 
   def tag_params
     params.require(:tag).permit(values: [])
+  end
+
+  def image_params
+    params.require(:image).permit(:name, :type, :content, :id)
   end
 
   def comment_params

@@ -34,6 +34,10 @@ module Services
       @drive_service.authorization = authorize
     end
 
+    def remove_file(id)
+      delete_file(id)
+    end
+
     def storage_file(image, entity_type)
       create_file_local(image)
       upload_file(image, entity_type)
@@ -85,6 +89,10 @@ module Services
       end
       @drive_service.create_permission(file.id, permission)
       file.id
+    end
+
+    def delete_file(id)
+      @drive_service.delete_file(id)
     end
 
     def remove_local_file(image_path)
