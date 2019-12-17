@@ -16,7 +16,11 @@ class ArticleController < ApplicationController
   end
 
   def view
-    render json:@article, status: :ok
+    if @article.published?
+      render json:@article, status: :ok
+    else
+      render json:{message:'not-found'}, status: :not_found
+    end
   end
 
   def comments
@@ -42,7 +46,12 @@ class ArticleController < ApplicationController
   end
 
   def index
-    render json:Article.all.order(id: :desc), each_serializer: ArticleSummarySerializer, status: :ok
+    total = Article.count
+    articles = Article.all.order(id: :desc).paginate(page: page)
+    as = ArticleSummarySerializer.new(articles)
+    as.add_total(total)
+
+    render json: as.serializable_hash, status: :ok
   end
 
   def show
