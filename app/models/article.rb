@@ -5,6 +5,8 @@ class Article < ApplicationRecord
   has_and_belongs_to_many :main_tags, ->{ order(:created_at => :desc).limit(4)}, class_name: Tag.name
   belongs_to :practice_area
 
+  scope :find_with_keyword, ->(keyword){joins(:translations).where("(title LIKE ? OR content LIKE ? AND lang = ?", '%#{keyword}%', '%#{keyword}%', ArticleTranslation.langs[I18n.locale])}
+
   self.per_page = 6
 
   enum status: [ :pending, :published ]
