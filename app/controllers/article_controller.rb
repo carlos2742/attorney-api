@@ -9,7 +9,7 @@ class ArticleController < ApplicationController
   def search
     @articles = Article.published
     @articles = @articles.where(:practice_area_id => filter_params[:practice_areas]) if !filter_params[:practice_areas].empty?
-    @articles = @articles.find_with_keyword(filter_params[:keyword]) !filter_params[:keyword].empty?
+    @articles = @articles.find_with_keyword(filter_params[:keyword]) if !filter_params[:keyword].empty?
     @articles = @articles.order(updated_at: :desc).paginate(page: page)
     total = @articles.count
     @articles = @articles.group_by { |m| m.updated_at.beginning_of_month }
