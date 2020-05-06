@@ -9,7 +9,6 @@ class ArticleController < ApplicationController
   def search
     @articles = Article.published.order(updated_at: :desc).paginate(page: page)
     total = @articles.count
-    @articles = @articles.group_by { |m| m.updated_at.beginning_of_month }
     ags = ArticleGroupSerializer.new(@articles)
     ags.add_total(total)
     render json: ags.serializable_hash
