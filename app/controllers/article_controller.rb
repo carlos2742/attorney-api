@@ -7,9 +7,11 @@ class ArticleController < ApplicationController
 
   # ---- Blog Services ---- #
   def search
-    @articles = Article.published.order(updated_at: :desc).paginate(page: page)
+    @articles = Article.published
+    @articles = @articles.where(:practice_area_id => filter_params[:practice_areas]) if !filter_params[:practice_areas].empty?
+    @articles = @articles.find_with_keyword(filter_params[:keyword]) if !filter_params[:keyword].empty?
+    @articles = @articles.order(updated_at: :desc).paginate(page: page)
     total = @articles.count
-    @articles = @articles.group_by { |m| m.updated_at.beginning_of_month }
     ags = ArticleGroupSerializer.new(@articles)
     ags.add_total(total)
     render json: ags.serializable_hash
@@ -156,7 +158,7 @@ class ArticleController < ApplicationController
   end
 
   def filter_params
-    params.require(:filters).permit(:practice_area_id, :content);
+    params.require(:filters).permit( :keyword, practice_areas: []);
   end
 
   def page
