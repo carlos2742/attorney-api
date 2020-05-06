@@ -1,7 +1,7 @@
 class ArticleGroupSerializer < ActiveModel::Serializer
 
   class ArticleSerializer < ActiveModel::Serializer
-    attributes :id, :title, :summary, :image_id, :updated_at, :permalinks
+    attributes :id, :title, :summary, :image_id, :updated_at, :permalinks, :time_published
 
     belongs_to :practice_area
     has_many :main_tags
@@ -18,13 +18,16 @@ class ArticleGroupSerializer < ActiveModel::Serializer
       object.permalinks
     end
 
+    def time_published
+      (object.updated_at - DateTime.now).to_i.abs/3600
+    end
   end
 
   def serializable_hash
-    groups = @object.map do |some_group_key, some_models|
-      [ some_group_key , serialized_some_models(some_models) ]
-    end.to_h
-    {total: @total, groups: groups}
+    articles = object.map do | model |
+      ArticleSerializer.new(model, root: false)
+    end
+    {total: @total, data: articles}
   end
 
   def add_total (total)
