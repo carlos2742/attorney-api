@@ -230,4 +230,4 @@ tag.translations.create({name: 'Move', lang: 'es'})
 
 # ---------------------- User ----------------------
 
-User.create({name: 'Yahima', email:'ask.ymorejon@gmail.com', rol: 1})
+User.create({name: 'Yahima', email:'ask.ymorejon@gmail.com', rol: 1, password: '123456789'})
