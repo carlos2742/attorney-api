@@ -8,7 +8,6 @@
 
 # ---------------------- Practice Areas ----------------------
 
-=begin
 practice_area = PracticeArea.create({key: 'immigration'})
 practice_area.translations.create({name: 'Immigration', lang: 'en'})
 practice_area.translations.create({name: 'Inmigración', lang: 'es'})
@@ -32,11 +31,9 @@ practice_area.translations.create({name: 'Lesiones Personales', lang: 'es'})
 practice_area = PracticeArea.create({key: 'cdefense'})
 practice_area.translations.create({name: 'Criminal Defense', lang: 'en'})
 practice_area.translations.create({name: 'Defensa Penal', lang: 'es'})
-=end
 
 # ---------------------- Tags ----------------------
 
-=begin
 tag = Tag.create()
 tag.translations.create({name: 'Attorney', lang: 'en'})
 tag.translations.create({name: 'Abogado', lang: 'es'})
@@ -214,7 +211,6 @@ tag.translations.create({name: 'Crédito', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Finance', lang: 'en'})
 tag.translations.create({name: 'Finanzas', lang: 'es'})
-=end
 
 tag = Tag.create()
 tag.translations.create({name: 'Divorce', lang: 'en'})
@@ -231,3 +227,7 @@ tag.translations.create({name: 'Hijos menores', lang: 'es'})
 tag = Tag.create()
 tag.translations.create({name: 'Mudanza', lang: 'en'})
 tag.translations.create({name: 'Move', lang: 'es'})
+
+# ---------------------- User ----------------------
+
+User.create({name: 'Yahima', email:'ask.ymorejon@gmail.com', rol: 1})
